@@ -7,6 +7,7 @@ public class WeirdAlgorithm {
         Scanner sc = new Scanner(System.in);
         // integer n
         long n = sc.nextLong();
+        sc.close();
 
         // print n
         System.out.print(n);
