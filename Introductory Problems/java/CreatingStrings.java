@@ -13,9 +13,14 @@ public class CreatingStrings {
             return;
         }
 
+        // For same level and different fixedIndex possible chars
         for(int i=fixedIndex; i <= lastIndex; i++) {
+            // swap the fixedIndex char with ith char
             string = swap(string, fixedIndex, i);
+            // do recursive call for next level
             permutate(string, fixedIndex + 1, lastIndex);
+
+            // undo the swap and backtrack
             string = swap(string, fixedIndex, i);
         }
     }
