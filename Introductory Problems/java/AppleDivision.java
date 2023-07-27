@@ -36,7 +36,6 @@ public class AppleDivision {
         // print the result
         System.out.println(minDiff);
         
-        // end of program
     }
 
 }
