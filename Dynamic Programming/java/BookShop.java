@@ -1,9 +1,66 @@
+import java.io.BufferedOutputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 
 // TLE - Hence switching to C++
 public class BookShop {
-    static class Reader {
+
+    private static void knapsack01(int n, int bagSize, int[] weight, int[] value) throws IOException {
+        // writer
+        OutputStream ws = new BufferedOutputStream(System.out);
+
+        // Initialize dp array
+        int[][] dp = new int[n+1][bagSize+1];
+
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= bagSize; j++) {
+                // case: we dont pick jth item
+                dp[i][j] = dp[i-1][j];
+                // case: we pick jth item
+                if (j >= weight[i-1]) {
+                    // jth item weight should be smaller or equal to bagSize
+                    dp[i][j] = Math.max(dp[i][j], dp[i-1][j-weight[i-1]] + value[i-1]);
+                }
+            }
+        }
+
+        // print the result
+        ws.write((dp[n][bagSize] + "").getBytes());
+        ws.flush();
+       
+    }
+
+    public static void main(String[] args) throws IOException {
+        // Initializing Reader for taking inputs
+        Reader read = new Reader();
+
+        // no. of books
+        int n = read.nextInt();
+
+        // max bag amount
+        int maxAmount = read.nextInt();
+        
+        // price of each book
+        int[] booksPrices = new int[n];
+        for (int i = 0; i < n; i++) {
+            booksPrices[i] = read.nextInt();
+        }
+        
+        // pages of each book
+        int[] booksPages = new int[n];
+        for (int i = 0; i < n; i++) {
+            booksPages[i] = read.nextInt();
+        }
+
+        // solve
+        knapsack01(n, maxAmount, booksPrices, booksPages);
+
+        return;
+
+    }
+
+    public static class Reader {
         final private int BUFFER_SIZE = 1 << 16;
         private DataInputStream din;
         private byte[] buffer;
@@ -56,54 +113,5 @@ public class BookShop {
                 return;
             din.close();
         }
-    }
-
-    private static void knapsack01(int n, int bagSize, int[] weight, int[] value) {
-
-        // Initialize dp array
-        int[][] dp = new int[n+1][bagSize+1];
-
-        for (int i = 1; i <= n; i++) {
-            for (int j = 1; j <= bagSize; j++) {
-                // case: we dont pick jth item
-                dp[i][j] = dp[i-1][j];
-                // case: we pick jth item
-                if (j >= weight[i-1]) {
-                    // jth item weight should be smaller or equal to bagSize
-                    dp[i][j] = Math.max(dp[i][j], dp[i-1][j-weight[i-1]] + value[i-1]);
-                }
-            }
-        }
-
-        // print the result
-        System.out.println(dp[n][bagSize]);
-       
-    }
-
-    public static void main(String[] args) throws IOException {
-        // Initializing Reader for taking inputs
-        Reader read = new Reader();
-
-        // no. of books
-        int n = read.nextInt();
-
-        // max bag amount
-        int maxAmount = read.nextInt();
-        
-        // price of each book
-        int[] booksPrices = new int[n];
-        for (int i = 0; i < n; i++) {
-            booksPrices[i] = read.nextInt();
-        }
-        
-        // pages of each book
-        int[] booksPages = new int[n];
-        for (int i = 0; i < n; i++) {
-            booksPages[i] = read.nextInt();
-        }
-
-        // solve
-        knapsack01(n, maxAmount, booksPrices, booksPages);
-
     }
 }
