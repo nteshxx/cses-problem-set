@@ -9,7 +9,7 @@ public class Permutations {
     private static void printBeautifulPermutations() throws IOException {
         // fast output
         // BufferedOutputStream is safer and consistent rather then BufferedWriter
-        OutputStream bsOut = new BufferedOutputStream (System.out);
+        OutputStream bsOut = new BufferedOutputStream(System.out);
         // BufferedWriter bwOut = new BufferedWriter(new OutputStreamWriter(System.out));
 
         // corner case
