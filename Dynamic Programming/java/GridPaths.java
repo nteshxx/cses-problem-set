@@ -28,6 +28,7 @@ public class GridPaths {
         // print the result
         System.out.println(waysToTravel[size][size]);
 
+        return;
     }
 
     public static void main(String[] args) {
@@ -54,5 +55,6 @@ public class GridPaths {
         // solve
         gridTraveler(size, maze);
 
+        return;
     }
 }
