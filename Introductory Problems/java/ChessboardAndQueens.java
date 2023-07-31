@@ -76,6 +76,8 @@ public class ChessboardAndQueens {
                 board.get(currentRow).setCharAt(column, '.');
             }
         }
+
+        return;
     }
 
     public static void main(String[] args) {
@@ -96,6 +98,8 @@ public class ChessboardAndQueens {
         // print answer
         System.out.println(solutions.size());
         // System.out.println(solutions);
+
+        return;
         // end of program
     }
 

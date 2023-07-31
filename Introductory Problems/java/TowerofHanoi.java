@@ -12,6 +12,8 @@ public class TowerofHanoi {
         towerOfHanoi(n - 1, source, destination, middle);
         System.out.println(source + " " + destination);
         towerOfHanoi(n - 1, middle, source, destination);
+        
+        return;
     }
 
     public static void main(String[] args) {  
@@ -29,6 +31,6 @@ public class TowerofHanoi {
         // solve
         towerOfHanoi(n, '1', '2', '3');
 
-    }
-    
+        return;
+    }    
 }

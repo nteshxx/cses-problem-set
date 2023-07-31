@@ -1,3 +1,6 @@
+import java.io.BufferedOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeSet;
@@ -23,6 +26,8 @@ public class CreatingStrings {
             // undo the swap and backtrack
             string = swap(string, fixedIndex, i);
         }
+
+        return;
     }
 
     private static String swap(String string, int index1, int index2) {
@@ -32,16 +37,25 @@ public class CreatingStrings {
         return swappedString.toString();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        // reader
         Scanner sc = new Scanner(System.in);
         String string = sc.next();
         sc.close();
 
+        // writer
+        OutputStream out = new BufferedOutputStream(System.out);
+
         // solve
         permutate(string, 0, string.length() - 1);
-        System.out.println(permutations.size());
+        out.write((permutations.size() + "\n").getBytes());
         for(String permutation : permutations) {
-            System.out.println(permutation);
+            out.write((permutation + "\n").getBytes());
         }
+
+        // print the solution
+        out.flush();
+
+        return;
     }
 }

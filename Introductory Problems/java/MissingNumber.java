@@ -30,5 +30,6 @@ public class MissingNumber {
         // print
         System.out.print(findMissingNumber(numbers));
 
+        return;
     }
 }

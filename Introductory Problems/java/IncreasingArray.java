@@ -34,6 +34,7 @@ public class IncreasingArray {
         // solve
         System.out.print(countMoves(array));
         
+        return;
     }
 
 }

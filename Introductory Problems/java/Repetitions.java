@@ -30,6 +30,7 @@ public class Repetitions {
         // solve
         System.out.println(findLongestSubstring(dna));
 
+        return;
     }
     
 }

@@ -45,6 +45,7 @@ public class Permutations {
         // solve
         printBeautifulPermutations();
 
+        return;
     }
 
 }

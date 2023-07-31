@@ -18,7 +18,7 @@ public class AppleDivision {
         return Math.min(
             minDifference(index + 1, crate1 + wts.get(index), crate2),
             minDifference(index + 1, crate1, crate2 + wts.get(index))
-            );
+        );
     }
 
     public static void main(String[] args) {
@@ -35,7 +35,8 @@ public class AppleDivision {
 
         // print the result
         System.out.println(minDiff);
-        
+
+        return;
     }
 
 }

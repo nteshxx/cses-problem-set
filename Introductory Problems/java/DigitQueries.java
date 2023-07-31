@@ -1,3 +1,6 @@
+import java.io.BufferedOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Scanner;
  
 public class DigitQueries {
@@ -19,7 +22,7 @@ public class DigitQueries {
         }
     }
  
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
  
@@ -30,9 +33,18 @@ public class DigitQueries {
         }
  
         sc.close();
+
+        // writer
+        OutputStream out = new BufferedOutputStream(System.out);
  
         for (long k : queries) {
-            System.out.println(findDigitAtPosition(k));
+            // solve each queries
+            out.write((findDigitAtPosition(k) + "\n").getBytes());
         }
+
+        // print the solution
+        out.flush();
+
+        return;
     }
 }
