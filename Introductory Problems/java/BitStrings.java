@@ -1,7 +1,6 @@
 import java.util.Scanner;
 
 public class BitStrings {
-    
     private static long modValue = 1000000007;
 
     private static void possibleBitStrings(int n) {
