@@ -3,7 +3,7 @@ import java.util.*;
 
 public class Apartments {
 
-    private static int allocateApartments(long diff, long[] requiredSizes, long[] availableSizes) {
+    private static void allocateApartments(int diff, int[] requiredSizes, int[] availableSizes) {
         Arrays.sort(requiredSizes);
         Arrays.sort(availableSizes);
 
@@ -12,7 +12,7 @@ public class Apartments {
 
         while (i < requiredSizes.length && j < availableSizes.length) {
             // calculate the difference
-            long sizeDifference = requiredSizes[i] - availableSizes[j];
+            int sizeDifference = requiredSizes[i] - availableSizes[j];
             
             if (Math.abs(sizeDifference) <= diff) {
                 // acceptable difference
@@ -28,7 +28,10 @@ public class Apartments {
             }
         }
 
-        return count;
+        // print the solution
+        System.out.println(count);
+
+        return;
     }
     
     public static void main(String[] args) throws IOException {
@@ -37,20 +40,20 @@ public class Apartments {
         
         int applicants = read.nextInt();
         int apartments = read.nextInt();
-        long diff = read.nextLong();
+        int diff = read.nextInt();
  
-        long[] requiredSizes = new long[applicants];
+        int[] requiredSizes = new int[applicants];
         for (int i = 0; i < applicants; i++) {
-            requiredSizes[i] = read.nextLong();
+            requiredSizes[i] = read.nextInt();
         }
         
-        long[] availableSizes = new long[apartments];
+        int[] availableSizes = new int[apartments];
         for (int i = 0; i < apartments; i++) {
-            availableSizes[i] = read.nextLong();
+            availableSizes[i] = read.nextInt();
         }
  
-        // solve and print the solution
-        System.out.print(allocateApartments(diff, requiredSizes, availableSizes));
+        // solve
+        allocateApartments(diff, requiredSizes, availableSizes);
  
         return;
     }
