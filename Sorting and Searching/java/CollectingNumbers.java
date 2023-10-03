@@ -22,19 +22,19 @@ public class CollectingNumbers {
         // read inputs
         int n = read.nextInt();
         read.nextLine();
-        String[] numbeStrings = read.nextLine().split("\\s+");
+        String[] numbers = read.nextLine().split("\\s+");
         read.close();
 
         // index array
-        int[] numbers = new int[n+1];
+        int[] indexArray = new int[n+1];
         for (int i = 0; i < n; i++) {
-            numbers[Integer.parseInt(numbeStrings[i])] = i + 1;
+            indexArray[Integer.parseInt(numbers[i])] = i + 1;
         }
 
         // solve using index array
         int rounds = 1;
         for (int i = 1; i < n; i++) {
-            if (numbers[i] > numbers[i+1]) {
+            if (indexArray[i] > indexArray[i+1]) {
                 rounds++;
             }
         }
