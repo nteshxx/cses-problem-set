@@ -10,17 +10,21 @@ public class StickLengths {
         // read inputs
         int n = read.nextInt();
         read.nextLine();
+        
         String[] stringArray = read.nextLine().split("\\s+");
         long[] stickLength = new long[n];
         for (int i = 0; i < stringArray.length; i++) {
             stickLength[i] = Long.parseLong(stringArray[i]);
         }
+
         read.close();
 
         // solve
         long minimumCost = 0;
+        
         // sorting array
         Arrays.sort(stickLength);
+        
         // make all elements equal to the median element
         for (int i = 0; i < stickLength.length; i++) {
             minimumCost += Math.abs(stickLength[i] - stickLength[n/2]);
