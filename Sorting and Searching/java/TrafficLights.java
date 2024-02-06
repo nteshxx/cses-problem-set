@@ -22,6 +22,7 @@ public class TrafficLights {
 
         // writer
         BufferedOutputStream writer = new BufferedOutputStream(System.out);
+        StringBuilder result = new StringBuilder();
 
         // solve
         NavigableSet<Integer> street = new TreeSet<>(List.of(0, streetLength));
@@ -49,10 +50,11 @@ public class TrafficLights {
 
             street.add(trafficLightPosition);
 
-            writer.write((passages.lastKey() + " ").getBytes());
+            result.append(passages.lastKey()).append(" ");
 
         }
 
+        writer.write(result.toString().getBytes());
         writer.flush();
 
         // close reader
