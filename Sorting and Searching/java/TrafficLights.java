@@ -31,13 +31,13 @@ public class TrafficLights {
         for (int i = 0; i < numberOfTrafficLights; i++) {
             Integer trafficLightPosition = Integer.parseInt(positionOfTrafficLights[i]);
 
-            Integer nextLightPositon = street.higher(trafficLightPosition);
-            Integer previousLightPosition = nextLightPositon != null ? street.lower(nextLightPositon) : null;
+            Integer nextLightPosition = street.higher(trafficLightPosition);
+            Integer previousLightPosition = nextLightPosition != null ? street.lower(nextLightPosition) : null;
 
-            if (previousLightPosition != null && nextLightPositon != null) {
-                Integer passageToBeDivided = nextLightPositon - previousLightPosition;
+            if (previousLightPosition != null && nextLightPosition != null) {
+                Integer passageToBeDivided = nextLightPosition - previousLightPosition;
                 Integer leftDivision = trafficLightPosition - previousLightPosition;
-                Integer rightDivision = nextLightPositon - trafficLightPosition;
+                Integer rightDivision = nextLightPosition - trafficLightPosition;
 
                 passages.put(passageToBeDivided, passages.getOrDefault(passageToBeDivided, 1) - 1);
                 if (passages.getOrDefault(passageToBeDivided, 0) == 0) {
