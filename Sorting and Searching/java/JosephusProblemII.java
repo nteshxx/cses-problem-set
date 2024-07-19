@@ -1,79 +1,40 @@
-import java.io.BufferedOutputStream;
-import java.io.IOException;
-import java.util.Iterator;
-import java.util.Scanner;
-import java.util.TreeSet;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import java.util.*;
+import java.io.*;
+import java.util.stream.*;
 
 public class JosephusProblemII {
-
+    
     public static void main(String[] args) throws IOException {
-
-        // Reader
-        Scanner sc = new Scanner(System.in);
-
-        // read inputs
-        String[] inputs = sc.nextLine().split("\\s+");
-        int numberOfChildrens = Integer.parseInt(inputs[0]);
-        int numbersToSkip = Integer.parseInt(inputs[1]);
-
-        // close reader
-        sc.close();
-
-        // Writer
-        BufferedOutputStream writer = new BufferedOutputStream(System.out);
-        StringBuffer removalOrder = new StringBuffer();
-
-        // Initialize TreeSet with n childrens
-        TreeSet<Integer> childrens = new TreeSet<>();
-        childrens.addAll(IntStream.rangeClosed(1, numberOfChildrens).boxed().collect(Collectors.toList()));
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         
-        // Iterator for iterating over childrens in ascending order
-        Iterator<Integer> iterator = childrens.iterator();
+        String inputs = br.readLine().trim();
+        int n = Integer.parseInt(inputs.split(" ")[0]);
+        int k = Integer.parseInt(inputs.split(" ")[1]);
 
-        // for keeping count of current child
-        int currentChild = 0;
+        TreeSet<Integer> s = IntStream.rangeClosed(1, n).boxed().collect(Collectors.toCollection(TreeSet::new));
+        
+        int ind = k % n;
 
-        // calculate first child to be removed
-        int currentSkip = numbersToSkip % childrens.size();
-
-        // remove every other child from the circle until list is empty
-        while (!childrens.isEmpty()) {
-            
-            // Reset iterator if it is reached to the end
-            iterator = iterator.hasNext() ? iterator : childrens.iterator();
-
-            if (currentChild == currentSkip) {
-                
-                // print and remove currentChild
-                removalOrder.append(iterator.next()).append(" ");
-                iterator.remove();
-
-                // reset counter for current child
-                currentChild = 0;
-
-                // calculate next child to be removed
-                currentSkip = childrens.isEmpty() ? 0 : numbersToSkip % childrens.size();
-
-            } else {
-
-                // skip currentChild
-                iterator.next();
-
-                // update currentChild count
-                currentChild++;
-
+        while (n-- > 0) {
+            int y = findByOrder(s, ind);
+            bw.write(y + " ");
+            s.remove(y);
+            if (n > 0) {
+                ind = (ind % n + k) % n;
             }
-            
         }
-
-        // print removal order
-        writer.write(removalOrder.toString().getBytes());
-        writer.flush();
-
-        return;
-
+        
+        bw.flush();
+        br.close();
+        bw.close();
     }
 
+    private static int findByOrder(TreeSet<Integer> set, int index) {
+        Iterator<Integer> it = set.iterator();
+        for (int i = 0; i < index; i++) {
+            it.next();
+        }
+        return it.next();
+    }
 }
