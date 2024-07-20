@@ -48,6 +48,7 @@ for (int i = 0; i < n; i++) {
     intervals[i] = new Interval(x, y, i);
     b.add(y);
 }
+```
 
 ## Create the Mapping
 
@@ -56,6 +57,7 @@ int cnt = 0;
 for (int y : b) {
     mp.put(y, ++cnt);
 }
+```
 
 ## In this code:
 
@@ -68,6 +70,7 @@ After coordinate compression, when updating or querying the Fenwick Tree, the co
 
 ```java
 update(cnt, mp.get(intervals[n - 1].end), 1);
+```
 
 This updates the Fenwick Tree using the compressed value of the end point of the last interval.
 
