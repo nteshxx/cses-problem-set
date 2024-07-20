@@ -42,15 +42,15 @@ Here's an example of how coordinate compression is implemented in Java:
 
 ```java
 // Interval class to store start, end, and index of each interval
-   private static class Interval {
-      int start, end, index;
-
-      Interval(int start, int end, int index) {
-         this.start = start;
-         this.end = end;
-         this.index = index;
-      }
+private static class Interval {
+   int start, end, index;
+   
+   Interval(int start, int end, int index) {
+      this.start = start;
+      this.end = end;
+      this.index = index;
    }
+}
 ```
 
 ### Extract and Sort Unique End Points
