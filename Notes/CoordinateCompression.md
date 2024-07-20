@@ -38,38 +38,53 @@ Now, instead of working with the original end points, you can work with their co
 
 Here's an example of how coordinate compression is implemented in Java:
 
+### Intervals
+
+```java
+// Interval class to store start, end, and index of each interval
+   private static class Interval {
+      int start, end, index;
+
+      Interval(int start, int end, int index) {
+         this.start = start;
+         this.end = end;
+         this.index = index;
+      }
+   }
+```
+
 ### Extract and Sort Unique End Points
 
 ```java
-Set<Integer> b = new TreeSet<>();
+Set<Integer> uniqueEnds = new TreeSet<>();
 for (int i = 0; i < n; i++) {
     int x = Integer.parseInt(parts[0]);
     int y = Integer.parseInt(parts[1]);
     intervals[i] = new Interval(x, y, i);
-    b.add(y);
+    uniqueEnds.add(y);
 }
 ```
 
 ## Create the Mapping
 
 ```java
-int cnt = 0;
-for (int y : b) {
-    mp.put(y, ++cnt);
+int count = 0;
+for (int end : uniqueEnds) {
+    map.put(end, ++count);
 }
 ```
 
 ## In this code:
 
-- `b` is a `TreeSet` which automatically sorts the unique end points.
-- `mp` is a `HashMap` that maps each original end point to its compressed value.
+- `uniqueEnds` is a `TreeSet` which automatically sorts the unique end points.
+- `map` is a `HashMap` that maps each original end point to its compressed value.
 
 ## Usage in the Algorithm
 
 After coordinate compression, when updating or querying the Fenwick Tree, the code uses the compressed values instead of the original ones. For example:
 
 ```java
-update(cnt, mp.get(intervals[n - 1].end), 1);
+update(count, map.get(intervals[n - 1].end), 1);
 ```
 
 This updates the Fenwick Tree using the compressed value of the end point of the last interval.
