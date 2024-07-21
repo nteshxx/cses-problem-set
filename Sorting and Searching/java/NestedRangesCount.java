@@ -71,9 +71,7 @@ public class NestedRangesCount {
         int[] containedByCount = new int[n];
         int[] containsCount = new int[n];
 
-        update(count, compressedEndMap.get(ranges[n-1].end), 1);
-
-        for (int i = n-2; i >= 0; i--) {
+        for (int i = n-1; i >= 0; i--) {
             containedByCount[ranges[i].index] += query(compressedEndMap.get(ranges[i].end));
             update(count, compressedEndMap.get(ranges[i].end), 1);
         }
@@ -81,10 +79,7 @@ public class NestedRangesCount {
         // reset Fenwick Tree
         Arrays.fill(fenwickTree, 0);
 
-        update(count, 1, 1);
-        update(count, compressedEndMap.get(ranges[0].end) + 1, -1);
-
-        for (int i = 1; i < n; i++) {
+        for (int i = 0; i < n; i++) {
             containsCount[ranges[i].index] += query(compressedEndMap.get(ranges[i].end));
             update(count, 1, 1);
             update(count, compressedEndMap.get(ranges[i].end) + 1, -1);

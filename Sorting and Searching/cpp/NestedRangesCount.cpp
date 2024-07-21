@@ -65,15 +65,9 @@ int main() {
     // sorting range vector based on start (ascending) and end (descendong) points
     sort(range.begin(), range.end(), compareStartAscEndDesc);
 
-    // count: n
-    // compressedCoordinates[range[n-1].first.second]: compressed value of last end interval
-    // delta: 1
-    update(count, compressedCoordinates[range[n-1].first.second], 1);
-
-    // 
     int ans[n] = {0};
     
-    for (int i = n-2; i >= 0; i--) {
+    for (int i = n-1; i >= 0; i--) {
         int index = range[i].second;
         int end = range[i].first.second;
         ans[index] += query(compressedCoordinates[end]);
@@ -91,10 +85,7 @@ int main() {
     // reset BIT tree
     memset(BIT, 0, sizeof BIT);
     
-    update(count, 1, 1);
-    update(count, compressedCoordinates[range[0].first.second] + 1, -1);
-    
-    for (int i = 1; i < n; i++) {
+    for (int i = 0; i < n; i++) {
         int index = range[i].second;
         int end = range[i].first.second;
         ans[index] += query(compressedCoordinates[end]);
