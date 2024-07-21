@@ -66,12 +66,12 @@ public class NestedRangesCount {
 
         // Sort ranges by start, and by end descending if starts are equal
         Arrays.sort(ranges, Comparator.comparingInt((Range r) -> r.start).thenComparingInt(r -> -r.end));
-
-        update(count, compressedEndMap.get(ranges[n-1].end), 1);
         
         // Arrays for storing results
         int[] containedByCount = new int[n];
         int[] containsCount = new int[n];
+
+        update(count, compressedEndMap.get(ranges[n-1].end), 1);
 
         for (int i = n-2; i >= 0; i--) {
             containedByCount[ranges[i].index] += query(compressedEndMap.get(ranges[i].end));
