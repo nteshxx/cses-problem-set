@@ -26,8 +26,11 @@ public class JosephusProblemII {
         }
         
         bw.flush();
-        br.close();
         bw.close();
+
+        br.close();
+
+        return;
     }
 
     private static int findByOrder(TreeSet<Integer> set, int index) {
