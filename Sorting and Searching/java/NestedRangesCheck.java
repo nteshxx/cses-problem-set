@@ -1,9 +1,6 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.Comparator;
- 
+import java.io.*;
+import java.util.*;
+
 public class NestedRangesCheck {
     
     static class Range {
@@ -21,18 +18,17 @@ public class NestedRangesCheck {
     public static void main(String[] args) throws NumberFormatException, IOException {
         
         // Reader
-        BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
+        FastIO io = new FastIO();
  
         // Get total customers
-        int totalLines = Integer.parseInt(read.readLine());
+        int totalLines = io.nextInt();
  
         // Array for storing ranges
         Range[] ranges = new Range[totalLines];
  
         for (int i = 0; i < totalLines; i++) {
             // Get Start and End point of ranges
-            String[] points = read.readLine().split(" ");
-            ranges[i] = new Range(Integer.parseInt(points[0]), Integer.parseInt(points[1]), i);
+            ranges[i] = new Range(io.nextInt(), io.nextInt(), i);
         }
  
         // Sort ranges by start, and by end descending if starts are equal
@@ -70,6 +66,71 @@ public class NestedRangesCheck {
             result.append(value).append(" ");
         }
  
-        System.out.print(result.toString());
+        io.print(result.toString());
+        io.close();
+
+        return;
     }
+
+    public static class FastIO extends PrintWriter {
+		private InputStream stream;
+		private byte[] buf = new byte[1 << 16];
+		private int curChar, numChars;
+
+		// standard input
+		public FastIO() { this(System.in, System.out); }
+		public FastIO(InputStream i, OutputStream o) {
+			super(o);
+			stream = i;
+		}
+		// file input
+		public FastIO(String i, String o) throws IOException {
+			super(new FileWriter(o));
+			stream = new FileInputStream(i);
+		}
+
+		// throws InputMismatchException() if previously detected end of file
+		private int nextByte() {
+			if (numChars == -1) throw new InputMismatchException();
+			if (curChar >= numChars) {
+				curChar = 0;
+				try {
+					numChars = stream.read(buf);
+				} catch (IOException e) { throw new InputMismatchException(); }
+				if (numChars == -1) return -1;  // end of file
+			}
+			return buf[curChar++];
+		}
+
+		// to read in entire lines, replace c <= ' '
+		// with a function that checks whether c is a line break
+		public String next() {
+			int c;
+			do { c = nextByte(); } while (c <= ' ');
+			StringBuilder res = new StringBuilder();
+			do {
+				res.appendCodePoint(c);
+				c = nextByte();
+			} while (c > ' ');
+			return res.toString();
+		}
+		public int nextInt() {  // nextLong() would be implemented similarly
+			int c;
+			do { c = nextByte(); } while (c <= ' ');
+			int sgn = 1;
+			if (c == '-') {
+				sgn = -1;
+				c = nextByte();
+			}
+			int res = 0;
+			do {
+				if (c < '0' || c > '9') throw new InputMismatchException();
+				res = 10 * res + c - '0';
+				c = nextByte();
+			} while (c > ' ');
+			return res * sgn;
+		}
+		
+        public double nextDouble() { return Double.parseDouble(next()); }
+	}
 }
