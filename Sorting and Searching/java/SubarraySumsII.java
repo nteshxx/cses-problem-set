@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class SubarraySumsI {
+public class SubarraySumsII {
 
     public static long subArraySumEqualsK(int target, int[] arr) {
         long ans = 0;
