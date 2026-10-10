@@ -5,42 +5,42 @@ import java.util.ArrayDeque;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
-enum Direction {
-    UP(-1, 0),
-    DOWN(1, 0),
-    LEFT(0, -1),
-    RIGHT(0, 1);
-
-    final int rowDelta;
-    final int colDelta;
-
-    Direction(int rowDelta, int colDelta) {
-        this.rowDelta = rowDelta;
-        this.colDelta = colDelta;
-    }
-}
-
-class Node {
-    int row;
-    int col;
-
-    public Node(int row, int col) {
-        this.row = row;
-        this.col = col;
-    }
-
-    public int getCol() {
-        return this.col;
-    }
-
-    public int getRow() {
-        return this.row;
-    }
-}
-
 public class CountingRooms {
     private static int n, m;
     private static char[][] buildingMap;
+
+    private static class Node {
+        int row;
+        int col;
+
+        public Node(int row, int col) {
+            this.row = row;
+            this.col = col;
+        }
+
+        public int getCol() {
+            return this.col;
+        }
+
+        public int getRow() {
+            return this.row;
+        }
+    }
+
+    private enum Direction {
+        UP(-1, 0),
+        DOWN(1, 0),
+        LEFT(0, -1),
+        RIGHT(0, 1);
+
+        final int rowDelta;
+        final int colDelta;
+
+        Direction(int rowDelta, int colDelta) {
+            this.rowDelta = rowDelta;
+            this.colDelta = colDelta;
+        }
+    }
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -61,7 +61,7 @@ public class CountingRooms {
             for (int col = 0; col < m; col++) {
                 if (buildingMap[row][col] == '.') {
                     totalRooms++;
-                    // DFS search / Flood Fill
+                    // BFS search / Flood Fill
                     exploreEntireRoom(new Node(row, col));
                 }
             }
